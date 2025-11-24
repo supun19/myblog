@@ -10,7 +10,19 @@ interface Node {
   label?: string
 }
 
-const SKILLS = ['AWS', 'Serverless', 'Node.js', 'Jitsi', 'React', 'Next.js', 'TypeScript', 'Docker']
+const SKILLS = [
+  'AWS',
+  'Serverless',
+  'Node.js',
+  'Jitsi',
+  'React',
+  'Next.js',
+  'TypeScript',
+  'Docker',
+  'CDK',
+  'Glue',
+  'NestJS',
+]
 
 export default function MeshGraph() {
   const canvasRef = useRef<HTMLCanvasElement>(null)
@@ -37,7 +49,7 @@ export default function MeshGraph() {
 
     const initNodes = () => {
       nodes = []
-      const numNodes = Math.floor((width * height) / 25000) // Density based on screen size
+      const numNodes = Math.floor((width * height) / 45000) // Reduced density (was 25000)
 
       // Add skill nodes
       SKILLS.forEach((skill) => {
@@ -82,7 +94,8 @@ export default function MeshGraph() {
           const dy = nodes[i].y - nodes[j].y
           const distance = Math.sqrt(dx * dx + dy * dy)
 
-          if (distance < 150) {
+          if (distance < 200) {
+            // Increased connection distance (was 150)
             const opacity = 1 - distance / 150
             ctx.strokeStyle = `rgba(100, 100, 100, ${opacity * 0.5})`
             ctx.beginPath()
